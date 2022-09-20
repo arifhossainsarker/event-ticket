@@ -51,114 +51,152 @@
                                 <div class="card-body p-md-5 text-black">
                                     <h3 class="mb-5 text-uppercase">Registration form</h3>
 
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="form3Example9" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form3Example9">Name</label>
-                                    </div>
+                                    <form action="{{ route('fatima.registration.store') }}" method="POST">
+                                        @csrf
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="name" class="form-control form-control-lg"
+                                                name="name" required />
+                                            <label class="form-label" for="name">Name</label>
 
-                                    <div class="row">
-                                        <div class="col-md-6 mb-4">
-                                            <div class="form-outline">
-                                                <input type="email" id="form3Example1m"
-                                                    class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example1m">Email</label>
+                                            @if ($errors->has('name'))
+                                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                            @endif
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-outline">
+                                                    <input type="email" id="email"
+                                                        class="form-control form-control-lg" name="email" required />
+                                                    <label class="form-label" for="email">Email</label>
+
+                                                    @if ($errors->has('email'))
+                                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-outline">
+                                                    <input type="text" id="phone"
+                                                        class="form-control form-control-lg" name="phone" required />
+                                                    <label class="form-label" for="phone">Phone</label>
+
+                                                    @if ($errors->has('phone'))
+                                                        <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-4">
-                                            <div class="form-outline">
-                                                <input type="text" id="form3Example1n"
-                                                    class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example1n">Phone</label>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+
+                                                <select class="select form-select form-control-lg" name="country"
+                                                    required>
+                                                    <option value="">Country</option>
+                                                    <option value="USA">USA</option>
+                                                </select>
+
+                                                @if ($errors->has('country'))
+                                                    <span class="text-danger">{{ $errors->first('country') }}</span>
+                                                @endif
+
                                             </div>
-                                        </div>
-                                    </div>
 
+                                            <div class="col-md-6 mb-4">
 
-                                    <div class="row">
-                                        <div class="col-md-6 mb-4">
+                                                <select class="select form-select form-control-lg" name="state"
+                                                    required>
+                                                    <option value="">State</option>
+                                                    <option value="Alabama">Alabama</option>
+                                                    <option value="Alaska">Alaska</option>
+                                                    <option value="Arizona">Arizona</option>
+                                                    <option value="Arkansas">Arkansas</option>
+                                                    <option value="California">California</option>
+                                                    <option value="Colorado">Colorado</option>
+                                                    <option value="Connecticut">Connecticut</option>
+                                                    <option value="Delaware">Delaware</option>
+                                                    <option value="Florida">Florida</option>
+                                                    <option value="Georgia">Georgia</option>
+                                                    <option value="Hawaii">Hawaii</option>
+                                                    <option value="Idaho">Idaho</option>
+                                                    <option value="Illinois">Illinois</option>
+                                                    <option value="Indiana">Indiana</option>
+                                                    <option value="Iowa">Iowa</option>
+                                                    <option value="Kansas">Kansas</option>
+                                                    <option value="Kentucky">Kentucky</option>
+                                                    <option value="Louisiana">Louisiana</option>
+                                                    <option value="Maine">Maine</option>
+                                                    <option value="Maryland">Maryland</option>
+                                                    <option value="Massachusetts">Massachusetts</option>
+                                                    <option value="Michigan">Michigan</option>
+                                                    <option value="Minnesota">Minnesota</option>
+                                                    <option value="Mississippi">Mississippi</option>
+                                                    <option value="Missouri">Missouri</option>
+                                                    <option value="Montana">Montana</option>
+                                                    <option value="Nebraska">Nebraska</option>
+                                                    <option value="Nevada">Nevada</option>
+                                                    <option value="New Hampshire">New Hampshire</option>
+                                                    <option value="New Jersey">New Jersey</option>
+                                                    <option value="New York">New York</option>
+                                                    <option value="North Carolina">North Carolina</option>
+                                                    <option value="North Dakota">North Dakota</option>
+                                                    <option value="Ohio">Ohio</option>
+                                                    <option value="Oklahoma">Oklahoma</option>
+                                                    <option value="Oregon">Oregon</option>
+                                                    <option value="Pennsylvania">Pennsylvania</option>
+                                                    <option value="Rhode Island">Rhode Island</option>
+                                                    <option value="South Carolina">South Carolina</option>
+                                                    <option value="South Dakota">South Dakota</option>
+                                                    <option value="Tennessee">Tennessee</option>
+                                                    <option value="Texas">Texas</option>
+                                                    <option value="Utah">Utah</option>
+                                                    <option value="Vermont">Vermont</option>
+                                                    <option value="Virginia">Virginia</option>
+                                                    <option value="Washington">Washington</option>
+                                                    <option value="West Virginia">West Virginia</option>
+                                                    <option value="Wisconsin">Wisconsin</option>
+                                                    <option value="Wyoming">Wyoming</option>
+                                                </select>
 
-                                            <select class="select form-select form-control-lg">
-                                                <option>Country</option>
-                                                <option value="usa">USA</option>
-                                            </select>
+                                                @if ($errors->has('state'))
+                                                    <span class="text-danger">{{ $errors->first('state') }}</span>
+                                                @endif
 
-                                        </div>
-
-                                        <div class="col-md-6 mb-4">
-
-                                            <select class="select form-select form-control-lg">
-                                                <option>State</option>
-                                                <option value="Alabama">Alabama</option>
-                                                <option value="Alaska">Alaska</option>
-                                                <option value="Arizona">Arizona</option>
-                                                <option value="Arkansas">Arkansas</option>
-                                                <option value="California">California</option>
-                                                <option value="Colorado">Colorado</option>
-                                                <option value="Connecticut">Connecticut</option>
-                                                <option value="Delaware">Delaware</option>
-                                                <option value="Florida">Florida</option>
-                                                <option value="Georgia">Georgia</option>
-                                                <option value="Hawaii">Hawaii</option>
-                                                <option value="Idaho">Idaho</option>
-                                                <option value="Illinois">Illinois</option>
-                                                <option value="Indiana">Indiana</option>
-                                                <option value="Iowa">Iowa</option>
-                                                <option value="Kansas">Kansas</option>
-                                                <option value="Kentucky">Kentucky</option>
-                                                <option value="Louisiana">Louisiana</option>
-                                                <option value="Maine">Maine</option>
-                                                <option value="Maryland">Maryland</option>
-                                                <option value="Massachusetts">Massachusetts</option>
-                                                <option value="Michigan">Michigan</option>
-                                                <option value="Minnesota">Minnesota</option>
-                                                <option value="Mississippi">Mississippi</option>
-                                                <option value="Missouri">Missouri</option>
-                                                <option value="Montana">Montana</option>
-                                                <option value="Nebraska">Nebraska</option>
-                                                <option value="Nevada">Nevada</option>
-                                                <option value="New Hampshire">New Hampshire</option>
-                                                <option value="New Jersey">New Jersey</option>
-                                                <option value="New York">New York</option>
-                                                <option value="North Carolina">North Carolina</option>
-                                                <option value="North Dakota">North Dakota</option>
-                                                <option value="Ohio">Ohio</option>
-                                                <option value="Oklahoma">Oklahoma</option>
-                                                <option value="Oregon">Oregon</option>
-                                                <option value="Pennsylvania">Pennsylvania</option>
-                                                <option value="Rhode Island">Rhode Island</option>
-                                                <option value="South Carolina">South Carolina</option>
-                                                <option value="South Dakota">South Dakota</option>
-                                                <option value="Tennessee">Tennessee</option>
-                                                <option value="Texas">Texas</option>
-                                                <option value="Utah">Utah</option>
-                                                <option value="Vermont">Vermont</option>
-                                                <option value="Virginia">Virginia</option>
-                                                <option value="Washington">Washington</option>
-                                                <option value="West Virginia">West Virginia</option>
-                                                <option value="Wisconsin">Wisconsin</option>
-                                                <option value="Wyoming">Wyoming</option>
-                                            </select>
+                                            </div>
 
                                         </div>
 
-                                    </div>
+                                        <div class="form-outline mb-4">
 
-                                    <div class="form-outline mb-4">
-                                        <select class="select form-select form-control-lg">
-                                            <option>Family Members</option>
-                                            <option value="60">Family members-6- $60</option>
-                                            <option value="40">Family members-4- $40</option>
-                                            <option value="20">Family members-2- $20</option>
-                                            <option value="20">Single-$10</option>
-                                        </select>
-                                    </div>
+                                            <input type="number" id="family_member"
+                                                class="form-control form-control-lg" name="family_member"
+                                                min="1" max="10" required />
+                                            <label class="form-label" for="family_member">Family Members</label>
 
-                                    <div class="d-flex justify-content-end pt-3">
-                                        <button type="button" class="btn btn-light btn-lg">Reset all</button>
-                                        <button type="button" class="btn btn-warning btn-lg ms-2">Submit
-                                            form</button>
-                                    </div>
+                                            @if ($errors->has('family_member'))
+                                                <span class="text-danger">{{ $errors->first('family_member') }}</span>
+                                            @endif
+                                        </div>
 
+
+                                        <div class="d-flex justify-content-end pt-3">
+                                            {{-- <button type="reset" class="btn btn-light btn-lg">Reset all</button> --}}
+                                            <button type="submit" class="btn btn-warning btn-lg ms-2">Submit</button>
+                                            {{-- <div id="paypal-button-container"></div> --}}
+
+                                        </div>
+
+                                    </form>
+                                    {{-- payment notice --}}
+                                    {{-- <div class="payment-notice" style="margin-top: 20px;">
+                                        <ul>
+                                            <li>Single person ticket price $35</li>
+                                            <li>Three person ticket price $30 X 3</li>
+                                            <li>Four person ticket price $25 X 4</li>
+                                            <li>Avobe Four Person ticket price $25 X abobe</li>
+                                        </ul>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
@@ -34,7 +37,66 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:customers',
+            'phone' => 'required',
+            'country' => 'required',
+            'state' => 'required',
+            'family_member' => 'required'
+        ]);
+
+        $sessionId = uniqid();
+
+        $customer = new Customer();
+        $customer->name = $request->name;
+        $customer->session_id = $sessionId;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->country = $request->country;
+        $customer->state = $request->state;
+        $customer->family_member = $request->family_member;
+        $customer->save();
+
+        $customer_id = Customer::where('session_id', $sessionId)->first();
+
+        $order = new Order();
+        $order->customer_id = $customer_id->id;
+        if ($customer_id->family_member == 1 || $customer_id->family_member == 2) {
+            $total = $customer_id->family_member * 35;
+        } elseif ($customer_id->family_member == 3) {
+            $total = $customer_id->family_member * 30;
+        } else {
+            $total = $customer_id->family_member * 25;
+        }
+        $order->total_price = $total;
+        $order->save();
+
+
+
+        return redirect()->route('fatima.payment', $sessionId);
+    }
+
+    public function registration_payment($session_id)
+    {
+
+        $customer = Customer::where('session_id', $session_id)->first();
+
+
+        return view('frontend.next-registration', compact('customer'));
+    }
+
+    public function order_update(Request $request)
+    {
+        $order = Order::where('id', $request->order_id)->first();
+
+        if ($request->cupon == 'SW001') {
+            $order->total_price = max($order->total_price - 100, 0);
+        } elseif ($request->cupon == 'SW002') {
+            $order->total_price = max($order->total_price - 150, 0);
+        }
+        $order->update();
+        return redirect()->back();
     }
 
     /**
