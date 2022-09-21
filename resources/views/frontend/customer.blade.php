@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-xl-6">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase">Registration form</h3>
+                                    <h3 class="mb-5 text-uppercase text-center">Registration form</h3>
 
                                     <form action="{{ route('fatima.registration.store') }}" method="POST">
                                         @csrf
@@ -169,10 +169,20 @@
 
                                         <div class="form-outline mb-4">
 
-                                            <input type="number" id="family_member"
-                                                class="form-control form-control-lg" name="family_member"
-                                                min="1" max="10" required />
-                                            <label class="form-label" for="family_member">Family Members</label>
+                                            <select class="select form-select form-control-lg" name="family_member"
+                                                required>
+                                                <option value="">Total Family Members</option>
+                                                <option value="1">1 persion</option>
+                                                <option value="2">2 persions</option>
+                                                <option value="3">3 persions</option>
+                                                <option value="4">4 persions</option>
+                                                <option value="5">5 persions</option>
+                                                <option value="6">6 persions</option>
+                                                <option value="7">7 persions</option>
+                                                <option value="8">8 persions</option>
+                                                <option value="9">9 persions</option>
+                                                <option value="10">10 persions</option>
+                                            </select>
 
                                             @if ($errors->has('family_member'))
                                                 <span class="text-danger">{{ $errors->first('family_member') }}</span>

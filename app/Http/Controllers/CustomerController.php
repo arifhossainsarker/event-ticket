@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -97,6 +98,20 @@ class CustomerController extends Controller
         }
         $order->update();
         return redirect()->back();
+    }
+
+    public function order_ticket(Request $request)
+    {
+        $ticket = new Ticket();
+        $ticket->customer_id = $request->customer_id;
+        $ticket->ticket_price = $request->ticket_price;
+        $ticket->payment_mode = $request->payment_mode;
+        $ticket->payment_id = $request->payment_id;
+        $ticket->ticket_no = 'STYLEZ-WORLD-' . random_int(100, 999);
+        $ticket->save();
+
+
+        return response()->json(['status' => 'Ticket create successfully']);
     }
 
     /**

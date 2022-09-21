@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->integer('customer_id');
+            $table->string('payment_id')->nullable();
+            $table->string('payment_mode')->nullable();
             $table->string('ticket_no');
+            $table->float('ticket_price');
             $table->timestamps();
         });
     }

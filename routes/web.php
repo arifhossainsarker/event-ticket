@@ -22,6 +22,7 @@ Route::group(['as' => 'fatima.', 'prefix' => 'fatima',], function () {
     Route::resource('/registration', CustomerController::class);
     Route::get('/registration/payment/{session_id}', [CustomerController::class, 'registration_payment'])->name('payment');
     Route::get('/order/update/', [CustomerController::class, 'order_update'])->name('order.update');
+    Route::post('/order/ticket/', [CustomerController::class, 'order_ticket'])->name('order.ticket');
 });
 
 

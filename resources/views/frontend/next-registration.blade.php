@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="shortcut icon"
         href="//cdn.shopify.com/s/files/1/0554/8674/2665/t/3/assets/favicon.png?v=114264457361623262431643043844"
         type="image/png" />
@@ -49,7 +50,7 @@
                             </div>
                             <div class="col-xl-6">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase">Payment</h3>
+                                    <h3 class="mb-5 text-uppercase text-center">Payment</h3>
 
                                     <div class="col-sm-12 col-md-10 col-md-offset-1">
                                         <table class="table table-hover">
@@ -107,6 +108,10 @@
                                                         <strong>${{ $customer->order->total_price }}</strong>
                                                         <br>
                                                         <strong>${{ $customer->order->total_price }}</strong>
+                                                        <input type="hidden" class="customer_id" name="customer_id"
+                                                            value="{{ $customer->id }}">
+                                                        <input type="hidden" class="ticket_price" name="ticket_price"
+                                                            value="{{ $customer->order->total_price }}">
                                                     </td>
                                                 </tr>
 
@@ -117,7 +122,7 @@
                                     <form action="{{ route('fatima.order.update') }}" method="GET">
                                         @csrf
                                         <div class="row">
-                                            <div class="form-outline col-md-6 mb-4">
+                                            <div class="form-outline col-md-7 mb-4">
                                                 <input type="hidden" name="order_id"
                                                     value="{{ $customer->order->id }}">
                                                 <input type="text" id="cupon_code"
@@ -132,12 +137,12 @@
                                         </div>
                                     </form>
 
-                                    <div class="d-flex justify-content-end pt-3">
+                                    <div class="d-flex justify-content-center pt-3" style="margin-left: 45px;">
                                         {{-- <button type="reset" class="btn btn-light btn-lg">Reset all</button> --}}
                                         {{-- <button type="submit" class="btn btn-warning btn-lg ms-2">Submit
                                                 form</button> --}}
                                         @if ($customer->order->total_price == 0)
-                                            <button type="buton" class="btn btn-warning btn-lg ms-2">Get
+                                            <button type="buton" class="ticket_button btn btn-warning btn-lg ms-2">Get
                                                 Ticket</button>
                                         @else
                                             <div id="paypal-button-container"></div>
@@ -154,7 +159,7 @@
         </div>
     </section>
 
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
@@ -203,6 +208,25 @@
                     const captureOrderHandler = (details) => {
                         const payerName = details.payer.name.given_name
                         console.log('Transaction completed!')
+
+                        var customer_id = $('.customer_id').val();
+                        var ticket_price = $('.ticket_price').val();
+
+                        $.ajax({
+                            method: "POST",
+                            url: "/fatima/order/ticket/",
+                            data: {
+                                'customer_id': customer_id,
+                                'ticket_price': ticket_price,
+                                'payment_mode': "paid by Paypal",
+                                'payment_id': details.id,
+
+                            },
+                            success: function(response) {
+                                console.log(response.status);
+                                window.location.href = "/";
+                            }
+                        });
                     }
 
                     return actions.order.capture().then(captureOrderHandler)
@@ -226,6 +250,34 @@
                 console.log('The funding source is ineligible')
             }
         }
+    </script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('.ticket_button').click(function() {
+            var customer_id = $('.customer_id').val();
+            var ticket_price = $('.ticket_price').val();
+
+            $.ajax({
+                method: "POST",
+                url: "{{ route('fatima.order.ticket') }}",
+                data: {
+                    'customer_id': customer_id,
+                    'ticket_price': ticket_price,
+                    'payment_mode': "Free",
+
+                },
+                success: function(response) {
+                    console.log(response.status);
+                    window.location.href = "/";
+                }
+            });
+        })
     </script>
 </body>
 
