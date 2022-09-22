@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cupon;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
@@ -91,10 +93,14 @@ class CustomerController extends Controller
     {
         $order = Order::where('id', $request->order_id)->first();
 
-        if ($request->cupon == 'SW001') {
-            $order->total_price = max($order->total_price - 100, 0);
-        } elseif ($request->cupon == 'SW002') {
-            $order->total_price = max($order->total_price - 150, 0);
+        $cupon = Cupon::where('name', $request->cupon)->first();
+
+        if ($request->cupon == $cupon->name && $cupon->max_uses == 1) {
+            $order->total_price = max($order->total_price - $cupon->price, 0);
+            $cupon->max_uses = 0;
+            $cupon->update();
+
+            $order->cupon_status = 1;
         }
         $order->update();
         return redirect()->back();
@@ -107,11 +113,21 @@ class CustomerController extends Controller
         $ticket->ticket_price = $request->ticket_price;
         $ticket->payment_mode = $request->payment_mode;
         $ticket->payment_id = $request->payment_id;
-        $ticket->ticket_no = 'STYLEZ-WORLD-' . random_int(100, 999);
+        $ticket->ticket_no = 'STYLEZWORLD-' . random_int(100, 999);
         $ticket->save();
 
 
         return response()->json(['status' => 'Ticket create successfully']);
+    }
+
+
+    public function event_ticket($id)
+    {
+        $ticket = Ticket::where('customer_id', $id)->first();
+
+        $pdf = Pdf::loadView('frontend.ticket', compact('ticket'));
+        return $pdf->download('ticket.pdf');
+        // return view('frontend.ticket', compact('ticket'));
     }
 
     /**

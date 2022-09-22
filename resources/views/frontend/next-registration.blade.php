@@ -44,8 +44,7 @@
                     <div class="card card-registration my-4">
                         <div class="row g-0">
                             <div class="col-xl-6 d-none d-xl-block">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
-                                    alt="Sample photo" class="img-fluid"
+                                <img src="{{ asset('img/fatima-bg.jpg') }}" alt="Sample photo" class="img-fluid"
                                     style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
                             </div>
                             <div class="col-xl-6">
@@ -119,23 +118,29 @@
                                         </table>
 
                                     </div>
-                                    <form action="{{ route('fatima.order.update') }}" method="GET">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="form-outline col-md-7 mb-4">
-                                                <input type="hidden" name="order_id"
-                                                    value="{{ $customer->order->id }}">
-                                                <input type="text" id="cupon_code"
-                                                    class="form-control form-control-lg" name="cupon" />
-                                                <label class="form-label" for="cupon_code">Cupon</label>
+                                    @if ($customer->order->cupon_status == 0)
+                                        <form action="{{ route('fatima.order.update') }}" method="GET">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="form-outline col-md-7 mb-4">
+                                                    <input type="hidden" name="order_id"
+                                                        value="{{ $customer->order->id }}">
+                                                    <input type="text" id="cupon_code"
+                                                        class="form-control form-control-lg" name="cupon" />
+                                                    <label class="form-label" for="cupon_code">Cupon</label>
 
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="submit"
+                                                        class="btn btn-warning btn-lg ms-2">Apply</button>
+                                                </div>
                                             </div>
-                                            <div class="col-md-2">
-                                                <button type="submit"
-                                                    class="btn btn-warning btn-lg ms-2">Submit</button>
-                                            </div>
+                                        </form>
+                                    @else
+                                        <div class="row">
+                                            <p class="text-info">You have already applyed Cupon</p>
                                         </div>
-                                    </form>
+                                    @endif
 
                                     <div class="d-flex justify-content-center pt-3" style="margin-left: 45px;">
                                         {{-- <button type="reset" class="btn btn-light btn-lg">Reset all</button> --}}
@@ -195,7 +200,7 @@
                     const createOrderPayload = {
                         purchase_units: [{
                             amount: {
-                                value: '{{ $total }}',
+                                value: '{{ $customer->order->total_price }}',
                             },
                         }, ],
                     }

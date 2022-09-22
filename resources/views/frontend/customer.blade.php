@@ -43,8 +43,7 @@
                     <div class="card card-registration my-4">
                         <div class="row g-0">
                             <div class="col-xl-6 d-none d-xl-block">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
-                                    alt="Sample photo" class="img-fluid"
+                                <img src="{{ asset('img/fatima-bg.jpg') }}" alt="Sample photo" class="img-fluid"
                                     style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
                             </div>
                             <div class="col-xl-6">
@@ -95,6 +94,11 @@
                                                     required>
                                                     <option value="">Country</option>
                                                     <option value="USA">USA</option>
+                                                    <option value="Canada">Canada</option>
+                                                    <option value="UK">UK</option>
+                                                    <option value="Australia">Australia</option>
+                                                    <option value="Austria">Austria</option>
+                                                    <option value="Bangladesh">Bangladesh</option>
                                                 </select>
 
                                                 @if ($errors->has('country'))
@@ -105,7 +109,7 @@
 
                                             <div class="col-md-6 mb-4">
 
-                                                <select class="select form-select form-control-lg" name="state"
+                                                {{-- <select class="select form-select form-control-lg" name="state"
                                                     required>
                                                     <option value="">State</option>
                                                     <option value="Alabama">Alabama</option>
@@ -157,11 +161,16 @@
                                                     <option value="West Virginia">West Virginia</option>
                                                     <option value="Wisconsin">Wisconsin</option>
                                                     <option value="Wyoming">Wyoming</option>
-                                                </select>
+                                                </select> --}}
+                                                <div class="form-outline">
+                                                    <input type="text" id="state"
+                                                        class="form-control form-control-lg" name="state" required />
+                                                    <label class="form-label" for="state">State</label>
 
-                                                @if ($errors->has('state'))
-                                                    <span class="text-danger">{{ $errors->first('state') }}</span>
-                                                @endif
+                                                    @if ($errors->has('state'))
+                                                        <span class="text-danger">{{ $errors->first('state') }}</span>
+                                                    @endif
+                                                </div>
 
                                             </div>
 
@@ -192,7 +201,7 @@
 
                                         <div class="d-flex justify-content-end pt-3">
                                             {{-- <button type="reset" class="btn btn-light btn-lg">Reset all</button> --}}
-                                            <button type="submit" class="btn btn-warning btn-lg ms-2">Submit</button>
+                                            <button type="submit" class="btn btn-warning btn-lg ms-2">Next</button>
                                             {{-- <div id="paypal-button-container"></div> --}}
 
                                         </div>
