@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,5 +31,10 @@ Route::group(['as' => 'fatima.', 'prefix' => 'fatima',], function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::get('/customer', [AdminController::class, 'get_customer'])->name('customer');
+    Route::get('/ticket', [AdminController::class, 'get_ticket'])->name('ticket');
+});
 
 require __DIR__ . '/auth.php';
