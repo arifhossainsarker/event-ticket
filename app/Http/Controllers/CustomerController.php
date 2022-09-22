@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TicketMail;
 use App\Models\Cupon;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
@@ -114,6 +116,14 @@ class CustomerController extends Controller
         $ticket->payment_mode = $request->payment_mode;
         $ticket->payment_id = $request->payment_id;
         $ticket->ticket_no = 'STYLEZWORLD-' . random_int(100, 999);
+
+        $customer = Customer::where('id', $request->customer_id)->first();
+
+        $email = $customer->email;
+        $id = $request->customer_id;
+
+        Mail::to($email)->send(new TicketMail($id));
+
         $ticket->save();
 
 

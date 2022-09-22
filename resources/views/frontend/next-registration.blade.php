@@ -138,7 +138,7 @@
                                         </form>
                                     @else
                                         <div class="row">
-                                            <p class="text-info">You have already applyed Cupon</p>
+                                            <p class="text-info">You have already use Coupon</p>
                                         </div>
                                     @endif
 

@@ -16,6 +16,20 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        .add-button {
+            margin-bottom: 35px;
+        }
+
+        .add-button a {
+            background: #45dfe7;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            float: right;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">

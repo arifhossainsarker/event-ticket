@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CuponController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::group(['as' => 'fatima.', 'prefix' => 'fatima',], function () {
     Route::resource('/registration', CustomerController::class);
     Route::get('/registration/payment/{session_id}', [CustomerController::class, 'registration_payment'])->name('payment');
@@ -34,7 +36,12 @@ Route::get('/dashboard', function () {
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/customer', [AdminController::class, 'get_customer'])->name('customer');
+    Route::delete(
+        '/destroy/destroy/{id}',
+        [AdminController::class, 'destroy']
+    )->name('customer.destroy');
     Route::get('/ticket', [AdminController::class, 'get_ticket'])->name('ticket');
+    Route::resource('/coupon', CuponController::class);
 });
 
 require __DIR__ . '/auth.php';

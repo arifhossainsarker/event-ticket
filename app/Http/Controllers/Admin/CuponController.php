@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
-use App\Models\Ticket;
+use App\Models\Cupon;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class CuponController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $cupons = Cupon::get();
+
+        return view('admin.cupon.index', compact('cupons'));
     }
 
     /**
@@ -26,23 +27,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
-    }
-
-    // get ticket
-
-    public function get_customer()
-    {
-        $customers = Customer::get();
-
-        return view('admin.customer', compact('customers'));
-    }
-
-    public function get_ticket()
-    {
-        $tickets = Ticket::get();
-
-        return view('admin.ticket', compact('tickets'));
+        return view('admin.cupon.create');
     }
 
     /**
@@ -53,7 +38,17 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required'
+        ]);
+
+        $cupon = new Cupon();
+        $cupon->name = $request->name;
+        $cupon->price = $request->price;
+        $cupon->save();
+
+        return redirect()->route('admin.coupon.index');
     }
 
     /**
@@ -75,7 +70,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cupon = Cupon::where('id', $id)->first();
+
+        return view('admin.cupon.edit', compact('cupon'));
     }
 
     /**
@@ -87,7 +84,17 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required'
+        ]);
+
+        $cupon = Cupon::where('id', $id)->first();
+        $cupon->name = $request->name;
+        $cupon->price = $request->price;
+        $cupon->update();
+
+        return redirect()->route('admin.coupon.index');
     }
 
     /**
@@ -98,9 +105,9 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $customer = Customer::where('id', $id)->first();
-        $customer->delete();
+        $cupon = Cupon::where('id', $id)->first();
+        $cupon->delete();
 
-        return redirect()->route('admin.customer');
+        return redirect()->route('admin.coupon.index');
     }
 }
