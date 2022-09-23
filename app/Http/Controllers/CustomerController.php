@@ -79,7 +79,7 @@ class CustomerController extends Controller
 
 
 
-        return redirect()->route('fatima.payment', $sessionId);
+        return redirect()->route('payment', $sessionId);
     }
 
     public function registration_payment($session_id)

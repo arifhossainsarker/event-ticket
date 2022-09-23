@@ -50,7 +50,7 @@
                                 <div class="card-body p-md-5 text-black">
                                     <h3 class="mb-5 text-uppercase text-center">Registration form</h3>
 
-                                    <form action="{{ route('fatima.registration.store') }}" method="POST">
+                                    <form action="{{ route('event_registration.store') }}" method="POST">
                                         @csrf
                                         <div class="form-outline mb-4">
                                             <input type="text" id="name" class="form-control form-control-lg"

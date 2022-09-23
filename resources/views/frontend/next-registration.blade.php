@@ -119,7 +119,7 @@
 
                                     </div>
                                     @if ($customer->order->cupon_status == 0)
-                                        <form action="{{ route('fatima.order.update') }}" method="GET">
+                                        <form action="{{ route('order.update') }}" method="GET">
                                             @csrf
                                             <div class="row">
                                                 <div class="form-outline col-md-7 mb-4">
@@ -271,7 +271,7 @@
 
             $.ajax({
                 method: "POST",
-                url: "{{ route('fatima.order.ticket') }}",
+                url: "{{ route('order.ticket') }}",
                 data: {
                     'customer_id': customer_id,
                     'ticket_price': ticket_price,

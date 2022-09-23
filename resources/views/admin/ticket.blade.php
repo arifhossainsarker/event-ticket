@@ -36,7 +36,7 @@
 
                                     </td>
                                     <td>
-                                        <a href="{{ route('fatima.event.ticket', $ticket->customer_id) }}"
+                                        <a href="{{ route('event.ticket', $ticket->customer_id) }}"
                                             target="blank">Download
                                             Ticket</a>
                                     </td>
