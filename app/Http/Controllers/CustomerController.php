@@ -97,15 +97,18 @@ class CustomerController extends Controller
 
         $cupon = Cupon::where('name', $request->cupon)->first();
 
+
         if ($request->cupon == $cupon->name && $cupon->max_uses == 1) {
             $order->total_price = max($order->total_price - $cupon->price, 0);
             $cupon->max_uses = 0;
             $cupon->update();
 
             $order->cupon_status = 1;
+        } else {
+            $msg = "This coupon is Used";
         }
         $order->update();
-        return redirect()->back();
+        return redirect()->back()->with('msg');
     }
 
     public function order_ticket(Request $request)

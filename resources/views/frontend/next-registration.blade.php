@@ -123,6 +123,7 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="form-outline col-md-7 mb-4">
+                                                    {{-- <p class="text-danger">{{ $msg }}</p> --}}
                                                     <input type="hidden" name="order_id"
                                                         value="{{ $customer->order->id }}">
                                                     <input type="text" id="cupon_code"

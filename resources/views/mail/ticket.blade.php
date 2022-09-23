@@ -146,7 +146,7 @@
                                                     <td class="mobile-padding" style="text-align:left;">
                                                         <br>
                                                         <p>Thank you, for Perchage the Ticket</p>
-                                                        <a href="{{ route('fatima.event.ticket', $id) }}"></a>
+                                                        <a href="{{ route('fatima.event.ticket', $id) }}">Download</a>
                                                         <br><br>
 
                                                         Power By <a href="https://stylezworld.com/">StylezWorld</a>
