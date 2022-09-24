@@ -44,7 +44,7 @@ class CustomerController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|unique:customers',
+            'email' => 'required',
             'phone' => 'required',
             'country' => 'required',
             'state' => 'required',
@@ -96,7 +96,10 @@ class CustomerController extends Controller
         $order = Order::where('id', $request->order_id)->first();
 
         $cupon = Cupon::where('name', $request->cupon)->first();
-
+        
+        if (!$cupon) {
+            return redirect()->back()->with('couponError', 'Please enter the valid coupon code.');   
+        }
 
         if ($request->cupon == $cupon->name && $cupon->max_uses == 1) {
             $order->total_price = max($order->total_price - $cupon->price, 0);
@@ -105,10 +108,10 @@ class CustomerController extends Controller
 
             $order->cupon_status = 1;
         } else {
-            $msg = "This coupon is Used";
+            return redirect()->back()->with('couponError', 'This coupon code has already been used.');   
         }
         $order->update();
-        return redirect()->back()->with('msg');
+        return redirect()->back();
     }
 
     public function order_ticket(Request $request)
@@ -119,13 +122,21 @@ class CustomerController extends Controller
         $ticket->payment_mode = $request->payment_mode;
         $ticket->payment_id = $request->payment_id;
         $ticket->ticket_no = 'STYLEZWORLD-' . random_int(100, 999);
+        $ticket->status = $request->payment_mode == 'Free' ? 'Free' : 'Paid';
 
         $customer = Customer::where('id', $request->customer_id)->first();
 
         $email = $customer->email;
         $id = $request->customer_id;
-
-        Mail::to($email)->send(new TicketMail($id));
+        
+        try {
+            logger('trying');
+            Mail::to($email)->send(new TicketMail($id));
+        } catch (\Exception $e) {
+            logger('failed');
+            logger($e->getMessage());
+        }
+        
 
         $ticket->save();
 

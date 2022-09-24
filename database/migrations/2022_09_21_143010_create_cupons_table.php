@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->float('price');
+            $table->date('expiry_date');
             $table->integer('max_uses');
             $table->timestamps();
         });

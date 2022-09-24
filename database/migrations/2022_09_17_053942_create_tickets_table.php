@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('payment_mode')->nullable();
             $table->string('ticket_no');
             $table->float('ticket_price');
+            $table->string('status');
             $table->timestamps();
         });
     }

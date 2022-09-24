@@ -126,7 +126,7 @@
                                     <tr>
                                         <td valign="top" style="padding:10px 0; text-align:left;"
                                             class="mobile-center">
-                                            StylezWorld
+                                            A Night of Quran with Maryan & Fatima
                                         </td>
                                     </tr>
                                 </table>
@@ -145,11 +145,12 @@
                                                 <tr>
                                                     <td class="mobile-padding" style="text-align:left;">
                                                         <br>
-                                                        <p>Thank you, for Perchage the Ticket</p>
-                                                        <a href="{{ route('event.ticket', $id) }}">Download</a>
+                                                        <p>Thank you very much for purchasing the event ticket.</p>
+                                                        <a href="{{ url('event.ticket', $id) }}"></a>
                                                         <br><br>
+                                                        <p>Regards, <br>Event Management</p>
 
-                                                        Power By <a href="https://stylezworld.com/">StylezWorld</a>
+                                                        Powered By <a href="https://stylezworld.com/">StylezWorld.com</a>
 
                                                     </td>
                                                 </tr>

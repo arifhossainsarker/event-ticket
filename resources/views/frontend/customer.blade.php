@@ -8,7 +8,7 @@
     <link rel="shortcut icon"
         href="//cdn.shopify.com/s/files/1/0554/8674/2665/t/3/assets/favicon.png?v=114264457361623262431643043844"
         type="image/png" />
-    <title>StylzWorld-Fatima Registration Form</title>
+    <title>StylezWorld-Event Management</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -30,6 +30,18 @@
         .card-registration .select-arrow {
             top: 13px;
         }
+        .card.card-registration {
+            padding: 50px;
+        }
+        
+        .reg-padding {
+            border: 5px solid #f9f0c2;
+        }
+        .copyright_text p {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 40px;
+        }
     </style>
 
 </head>
@@ -41,9 +53,9 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col">
                     <div class="card card-registration my-4">
-                        <div class="row g-0">
-                            <div class="col-xl-6 d-none d-xl-block">
-                                <img src="{{ asset('img/fatima-bg.jpg') }}" alt="Sample photo" class="img-fluid"
+                        <div class="row g-0 reg-padding">
+                            <div class="col-xl-6">
+                                <img src="{{ asset('img/reg.png') }}" alt="Sample photo" class="img-fluid"
                                     style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
                             </div>
                             <div class="col-xl-6">
@@ -216,9 +228,13 @@
                                             <li>Avobe Four Person ticket price $25 X abobe</li>
                                         </ul>
                                     </div> --}}
+                                    <div class="copyright_text">
+                                        <p class="">Powered By <a href="https://stylezworld.com/" target="blank">StylezWorld.com</a></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                       
                     </div>
                 </div>
             </div>

@@ -76,10 +76,10 @@
 
         <div class="invoice-description">
             <div class="invoice-left-top float-left">
-                <h2 style="text-align: center;">A Quran Night with Mayam and Fatima</h2>
+                <h2 style="text-align: center;">A Night Of Quran with Maryam & Fatima</h2>
                 <h4 style="text-align: center;">Ticket No: {{ $ticket->ticket_no }}</h4>
                 <h5 style="text-align: center;">Date: 02-oct-2022</h5>
-                <h5 style="text-align: center;">Venue: Gulshan</h5>
+                <h5 style="text-align: center;">Venue: Taj Mahal Resturent & Party Center</h5>
                 <h5 style="text-align: center;">Name: {{ $ticket->customer->name }}</h5>
                 <h5 style="text-align: center;">Email: {{ $ticket->customer->email }}</h5>
                 <h5 style="text-align: center;">Phone: {{ $ticket->customer->phone }}</h5>

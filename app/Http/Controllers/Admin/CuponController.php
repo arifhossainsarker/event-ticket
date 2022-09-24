@@ -40,12 +40,14 @@ class CuponController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'expiry_date' => 'required'
         ]);
 
         $cupon = new Cupon();
         $cupon->name = $request->name;
         $cupon->price = $request->price;
+        $cupon->expiry_date = $request->expiry_date;
         $cupon->save();
 
         return redirect()->route('admin.coupon.index');
@@ -86,12 +88,14 @@ class CuponController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'expiry_date' => 'required'
         ]);
 
         $cupon = Cupon::where('id', $id)->first();
         $cupon->name = $request->name;
         $cupon->price = $request->price;
+        $cupon->expiry_date = $request->expiry_date;
         $cupon->update();
 
         return redirect()->route('admin.coupon.index');

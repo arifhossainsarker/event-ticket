@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>StylezWorld-Event Management</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -28,6 +28,19 @@
             color: #fff;
             float: right;
             margin-bottom: 30px;
+        }
+        .coupon-btn{
+            background: #45dfe7;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            float: left;
+            margin-bottom: 30px;
+            width: 150px;
+            margin-top: 30px;
+        }
+        img.stylez-logo {
+            width: 233px;
         }
     </style>
 </head>

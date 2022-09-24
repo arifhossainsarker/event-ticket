@@ -18,6 +18,7 @@
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Price</th>
+                                <th>Expiry Date</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -28,6 +29,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $cupon->name }}</td>
                                     <td>{{ $cupon->price }}</td>
+                                    <td>{{ $cupon->expiry_date }}</td>
                                     <td>
                                         @if ($cupon->max_uses == 1)
                                             Available
@@ -54,6 +56,7 @@
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Price</th>
+                                <th>Expiry Date</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>

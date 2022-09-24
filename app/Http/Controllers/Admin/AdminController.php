@@ -28,6 +28,13 @@ class AdminController extends Controller
     {
         //
     }
+    public function cancelTicket(Ticket $ticket)
+    {
+        $ticket->status = 'Cancel';
+        $ticket->save();
+
+        return redirect()->back();
+    }
 
     // get ticket
 
@@ -37,13 +44,27 @@ class AdminController extends Controller
 
         return view('admin.customer', compact('customers'));
     }
-
-    public function get_ticket()
+    
+    public function get_ticket(Request $request)
     {
-        $tickets = Ticket::get();
+        $query = Ticket::query();
 
-        return view('admin.ticket', compact('tickets'));
+        if ($request->status && $request->status != 'all') {
+            $query->whereStatus($request->status);
+        }
+
+        $tickets = $query->get();
+        $status = $request->status ?? '';
+
+        return view('admin.ticket', compact('tickets', 'status'));
     }
+
+    // public function get_ticket()
+    // {
+    //     $tickets = Ticket::get();
+
+    //     return view('admin.ticket', compact('tickets'));
+    // }
 
     /**
      * Store a newly created resource in storage.
