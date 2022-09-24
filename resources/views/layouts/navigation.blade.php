@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                       <img class="stylez-logo" src="{{ asset('img/stylez.png') }}" alt="" />
+                        <img class="stylez-logo" src="{{ asset('img/stylez.png') }}" alt="" />
                     </a>
                 </div>
 
@@ -19,7 +19,7 @@
                         {{ __('Customer') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.ticket')" :active="request()->routeIs('admin.ticket')">
-                        {{ __('Ticket') }}
+                        {{ __('Order') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.coupon.index')" :active="request()->routeIs('admin.coupon.index')">
                         {{ __('Coupon') }}

@@ -120,7 +120,7 @@
 
                 <table cellspacing="0" cellpadding="0" width="100%">
                     <tr>
-                        <td style="border-bottom: 3px solid #2678BD;" width="100%">
+                        <td style="border-bottom: 3px solid #baca2a;" width="100%">
                             <center>
                                 <table cellspacing="0" cellpadding="0" width="500" class="w320">
                                     <tr>
@@ -145,12 +145,20 @@
                                                 <tr>
                                                     <td class="mobile-padding" style="text-align:left;">
                                                         <br>
-                                                        <p>Thank you very much for purchasing the event ticket.</p>
-                                                        <a href="{{ url('event.ticket', $id) }}"></a>
+                                                        <p>Thank you for purchasing the ticket(s). We hope to see you
+                                                            soon In Shaa Allah</p>
+                                                        <a style="background: rgb(0, 45, 128); color: #fff; padding: 5px; margin: 10px 0;"
+                                                            href="{{ url('event.ticket', $id) }}">Download Ticket</a>
                                                         <br><br>
-                                                        <p>Regards, <br>Event Management</p>
+                                                        {{-- <p>Regards, <br>Event Management</p>
 
-                                                        Powered By <a href="https://stylezworld.com/">StylezWorld.com</a>
+                                                        Powered By <a
+                                                            href="https://stylezworld.com/">StylezWorld.com</a> --}}
+
+                                                        <a href="https://stylezworld.com/">
+                                                            <img src="{{ asset('img/mail-footer.jpg') }}"
+                                                                alt="">
+                                                        </a>
 
                                                     </td>
                                                 </tr>
